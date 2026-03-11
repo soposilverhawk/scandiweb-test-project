@@ -1,0 +1,26 @@
+# Node / React
+client/node_modules/
+client/dist/
+client/build/
+client/.vite/
+client/.env.local
+client/.env.development.local
+client/.env.test.local
+client/.env.production.local
+
+# PHP / Composer
+server/vendor/
+server/*.log
+server/*.cache
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Database dumps
+*.sql
+*.sqlite
