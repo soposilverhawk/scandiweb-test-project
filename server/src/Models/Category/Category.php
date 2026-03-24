@@ -13,14 +13,14 @@ abstract class Category
 
     public function getName(): string
     {
-        return $this-> name;
+        return $this->name;
     }
 
     public function matches(string $categoryName): bool
     {
         return $this->getName() === $categoryName;
     }
-    
+
     public function getDefaultAttributes(): array
     {
         return [];
