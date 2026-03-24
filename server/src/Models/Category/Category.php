@@ -11,10 +11,22 @@ abstract class Category
         $this->name = $name;
     }
 
-    abstract public function getName(): string;
-
-    public function matches(string $cateogryName): bool
+    public function getName(): string
     {
-        return $this->getName() === $cateogryName;
+        return $this-> name;
     }
+
+    public function matches(string $categoryName): bool
+    {
+        return $this->getName() === $categoryName;
+    }
+    
+    public function getDefaultAttributes(): array
+    {
+        return [];
+    }
+
+    abstract public function getRequiredAttributes(): array;
+
+    abstract public function validateAttributes(array $productAttributes): void;
 }
