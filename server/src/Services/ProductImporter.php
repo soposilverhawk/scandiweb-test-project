@@ -2,11 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Attribute\TextAttribute;
-use App\Models\Attribute\SwatchAttribute;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Factories\ProductFactory;
+use App\Factories\AttributeFactory;
 
 class ProductImporter
 {
@@ -18,13 +17,13 @@ class ProductImporter
         ProductRepository $productRepo
     ) {
         $this->categoryRepo = $categoryRepo;
-        $this->productRepo  = $productRepo;
+        $this->productRepo = $productRepo;
     }
 
     public function import(array $json): void
     {
         $categories = $json['data']['categories'];
-        $products   = $json['data']['products'];
+        $products = $json['data']['products'];
 
         // 1) IMPORT CATEGORIES
         $categoryMap = $this->importCategories($categories);
@@ -63,23 +62,21 @@ class ProductImporter
 
             $categoryName = $p['category'];
 
-            // Build attribute objects
+            // Build attribute objects using AttributeFactory
             $attributes = [];
 
             foreach ($p['attributes'] as $attr) {
-                $class = $attr['type'] === 'text'
-                    ? TextAttribute::class
-                    : SwatchAttribute::class;
-
-                $attributes[$attr['name']] = new $class(
-                    $attr['id'],
-                    $attr['name'],
+                $attributes[$attr['name']] = AttributeFactory::create(
                     $attr['type'],
-                    $attr['items']
+                    [
+                        'id' => $attr['id'],
+                        'name' => $attr['name'],
+                        'items' => $attr['items'] ?? []
+                    ]
                 );
             }
 
-            // Create product model instance
+            // Create product model instance using ProductFactory
             $product = ProductFactory::create($categoryName, [
                 'id'=>$p['id'],
                 'name'=>$p['name'],
