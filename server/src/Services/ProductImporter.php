@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\Product\ClothesProduct;
-use App\Models\Product\TechProduct;
 use App\Models\Attribute\TextAttribute;
 use App\Models\Attribute\SwatchAttribute;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
+use App\Factories\ProductFactory;
 
 class ProductImporter
 {
@@ -64,13 +63,6 @@ class ProductImporter
 
             $categoryName = $p['category'];
 
-            // Determine product class based on category
-            $productClass = match ($categoryName) {
-                'clothes' => ClothesProduct::class,
-                'tech'    => TechProduct::class,
-                default => throw new \Exception("Unknown category '$categoryName'")
-            };
-
             // Build attribute objects
             $attributes = [];
 
@@ -88,27 +80,28 @@ class ProductImporter
             }
 
             // Create product model instance
-            $product = new $productClass(
-                $p['id'],
-                $p['name'],
-                $p['inStock'],
-                $p['brand'],
-                $p['description'],
-                $p['gallery'],
-                $attributes,
-                $p['prices']
-            );
+            $product = ProductFactory::create($categoryName, [
+                'id'=>$p['id'],
+                'name'=>$p['name'],
+                'inStock'=>$p['inStock'],
+                'brand'=>$p['brand'],
+                'description'=>$p['description'],
+                'gallery'=>$p['gallery'],
+                'attributes'=>$attributes,
+                'prices'=>$p['prices']
+            ]);
+            
 
             // Check if product exists in DB
             $productId = $this->productRepo->findIdByUid($product->getId());
 
             $data = [
-                'uid'         => $product->getId(),
-                'name'        => $product->getName(),
-                'stock'       => $product->isInStock() ? 1 : 0,
-                'category_id' => $categoryMap[$categoryName],
-                'brand'       => $product->getBrand(),
-                'description' => $product->getDescription()
+                'uid'=>$product->getId(),
+                'name'=>$product->getName(),
+                'stock'=>$product->isInStock() ? 1 : 0,
+                'category_id'=>$categoryMap[$categoryName],
+                'brand'=>$product->getBrand(),
+                'description'=>$product->getDescription()
             ];
 
             if ($productId) {
@@ -148,19 +141,19 @@ class ProductImporter
             foreach ($product->getAttributes() as $attr) {
 
                 $attrId = $this->productRepo->insertAttribute([
-                    'attribute_id' => $attr->getId(),
-                    'product_id'   => $productId,
-                    'name'         => $attr->getName(),
-                    'type'         => $attr->getType()
+                    'attribute_id'=>$attr->getId(),
+                    'product_id'=>$productId,
+                    'name'=>$attr->getName(),
+                    'type'=>$attr->getType()
                 ]);
 
                 foreach ($attr->getItems() as $item) {
 
                     $this->productRepo->insertAttributeItem([
-                        'attribute_item_id' => $item->getId(),
-                        'display'           => $item->getDisplayValue(),
-                        'value'             => $item->getValue(),
-                        'attribute_id'      => $attrId
+                        'attribute_item_id'=>$item->getId(),
+                        'display'=>$item->getDisplayValue(),
+                        'value'=>$item->getValue(),
+                        'attribute_id'=>$attrId
                     ]);
                 }
             }
