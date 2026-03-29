@@ -16,8 +16,8 @@ class PriceType
                 'name' => 'Price',
                 'fields' => [
                     'amount' => Type::nonNull(Type::float()),
-                    'currencyLabel' => Type::string(),
-                    'currencySymbol' => Type::string(),
+                    'currency_label' => Type::string(),
+                    'currency_symbol' => Type::string(),
                 ],
             ]);
         }
