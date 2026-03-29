@@ -2,15 +2,16 @@
 
 namespace App\Repositories;
 
+use App\Core\Database;
 use PDO;
 
 class CategoryRepository
 {
     private PDO $pdo;
 
-    public function __construct(PDO $pdo)
+    public function __construct(Database $db)
     {
-        $this->pdo = $pdo;
+        $this->pdo = $db->connect(); // Get the PDO instance
     }
 
     public function findIdByName(string $name): ?int
@@ -28,5 +29,26 @@ class CategoryRepository
         $stmt->execute(['name' => $name]);
 
         return (int)$this->pdo->lastInsertId();
+    }
+
+    public function findAll(): array
+    {
+        $stmt = $this->pdo->query("SELECT id, name FROM categories");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function findById(int $id): ?array
+    {
+        $stmt = $this->pdo->prepare('
+            SELECT id, name
+            FROM categories
+            WHERE id = :id
+            LIMIT 1
+        ');
+
+        $stmt->execute(['id' => $id]);
+        $category = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $category ?: null;
     }
 }
