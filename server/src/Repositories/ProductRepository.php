@@ -2,15 +2,16 @@
 
 namespace App\Repositories;
 
+use App\Core\Database;
 use PDO;
 
 class ProductRepository
 {
     private PDO $pdo;
 
-    public function __construct(PDO $pdo)
+    public function __construct(Database $db)
     {
-        $this->pdo = $pdo;
+        $this->pdo = $db->connect();
     }
 
     /* -------------------------------------------------------
@@ -171,5 +172,24 @@ class ProductRepository
             'value'   => $data['value'],
             'attr_id' => $data['attribute_id']
         ]);
+    }
+
+    public function findAll(): array
+    {
+        $stmt = $this->pdo->query('SELECT * FROM products');
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function findById(int $id): ?array
+    {
+        $stmt = $this->pdo->prepare('
+            SELECT *
+            FROM products
+            WHERE id = :id
+            LIMIT 1
+        ');
+
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 }
