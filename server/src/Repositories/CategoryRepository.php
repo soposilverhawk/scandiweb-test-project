@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Core\Database;
+use App\Factories\CategoryFactory;
+use App\Models\Category\Category;
 use PDO;
 
 class CategoryRepository
@@ -34,10 +36,12 @@ class CategoryRepository
     public function findAll(): array
     {
         $stmt = $this->pdo->query("SELECT id, name FROM categories");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return array_map(fn($row) => CategoryFactory::create($row['name']), $rows);
     }
 
-    public function findById(int $id): ?array
+    public function findById(int $id): ?Category
     {
         $stmt = $this->pdo->prepare('
             SELECT id, name
@@ -47,8 +51,7 @@ class CategoryRepository
         ');
 
         $stmt->execute(['id' => $id]);
-        $category = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $category ?: null;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? CategoryFactory::create($row['name']) : null;
     }
 }
