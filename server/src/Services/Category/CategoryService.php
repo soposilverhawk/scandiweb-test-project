@@ -3,6 +3,7 @@
 namespace App\Services\Category;
 
 use App\Repositories\CategoryRepository;
+use App\Models\Category\Category;
 
 class CategoryService 
 {
@@ -16,7 +17,7 @@ class CategoryService
         return $this->repo->findAll();
     }
 
-    public function getCategory(int $id): ?array {
+    public function getCategory(int $id): ?Category {
         return $this->repo->findById($id);
     }
 }

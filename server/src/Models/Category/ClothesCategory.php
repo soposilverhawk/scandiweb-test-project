@@ -4,9 +4,9 @@ namespace App\Models\Category;
 
 class ClothesCategory extends Category
 {
-    public function __construct()
+    public function __construct(int $id, string $name)
     {
-        parent::__construct('clothes');
+        parent::__construct($id, $name);
     }
 
     public function getRequiredAttributes(): array

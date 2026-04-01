@@ -38,7 +38,7 @@ class CategoryRepository
         $stmt = $this->pdo->query("SELECT id, name FROM categories");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return array_map(fn($row) => CategoryFactory::create($row['name']), $rows);
+        return array_map(fn($row) => CategoryFactory::create($row['id'], $row['name']), $rows);
     }
 
     public function findById(int $id): ?Category
@@ -52,6 +52,6 @@ class CategoryRepository
 
         $stmt->execute(['id' => $id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row ? CategoryFactory::create($row['name']) : null;
+        return $row ? CategoryFactory::create($row['id'], $row['name']) : null;
     }
 }

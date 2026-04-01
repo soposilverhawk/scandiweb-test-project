@@ -17,12 +17,12 @@ class CategoryFactory
      * @return Attribute
      * @throws \Exception
      */
-    public static function create(string $name): Category
+    public static function create(int $id, string $name): Category
     {
         return match(strtolower($name)) {
-            'clothes' => new ClothesCategory(),
-            'tech' => new TechCategory(),
-            'all' => new AllCategory(),
+            'clothes' => new ClothesCategory($id, 'clothes'),
+            'tech' => new TechCategory($id, 'tech'),
+            'all' => new AllCategory($id, 'all'),
         };
     }
 }
