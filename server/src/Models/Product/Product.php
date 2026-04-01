@@ -7,6 +7,7 @@ use App\Models\Category\Category;
 abstract class Product
 {
     protected string $id;
+    protected string $productUID;
     protected string $name;
     protected bool $inStock;
     protected string $categoryName;
@@ -20,6 +21,7 @@ abstract class Product
 
     public function __construct(
         string $id,
+        string $productUID,
         string $name,
         bool $inStock,
         Category $categoryObject,
@@ -30,6 +32,7 @@ abstract class Product
         array $prices = []
     ) {
         $this->id = $id;
+        $this->productUID = $productUID;
         $this->name = $name;
         $this->inStock = $inStock;
         $this->categoryObject = $categoryObject;
@@ -51,6 +54,11 @@ abstract class Product
     public function getId(): string 
     { 
         return $this->id; 
+    }
+
+    public function getProductUID(): string
+    {
+        return $this->productUID;
     }
 
     public function getName(): string {
