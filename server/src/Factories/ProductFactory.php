@@ -22,6 +22,7 @@ class ProductFactory
         return match ($categoryName) {
             'clothes' => new ClothesProduct(
                 $data['id'],
+                $data['productUID'],
                 $data['name'],
                 $data['inStock'],
                 $data['brand'],
@@ -33,6 +34,7 @@ class ProductFactory
 
             'tech' => new TechProduct(
                 $data['id'],
+                $data['productUID'],
                 $data['name'],
                 $data['inStock'],
                 $data['brand'],
