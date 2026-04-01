@@ -3,6 +3,7 @@
 namespace App\GraphQL\Queries;
 
 use App\Services\Category\CategoryService;
+use App\Models\Category\Category;
 
 class CategoryQuery 
 {
@@ -16,7 +17,7 @@ class CategoryQuery
         return $this->service->getAllCategories();
     }
 
-    public function getCategoryById(int $id): ?array {
+    public function getCategoryById(int $id): ?Category {
         return $this->service->getCategory($id);
     }
 }

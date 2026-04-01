@@ -15,11 +15,21 @@ class CategoryResolver
 
     public function categories(): array
     {
-        return $this->query->getCategories();
+        return array_map(fn($category) => [
+            'id' => $category->getId(),
+            'name' => $category->getName(),
+        ], $this->query->getCategories());
     }
 
     public function category($root, array $args): ?array
     {
-        return $this->query->getCategoryById($args['id']);
+        $category = $this->query->getCategoryById($args['id']);
+        
+        if (!$category) return null;
+
+        return [
+            'id' => $category->getId(),
+            'name' => $category->getName(),
+        ];
     }
 }
