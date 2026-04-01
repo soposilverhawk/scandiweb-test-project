@@ -52,11 +52,16 @@ abstract class Attribute
         $this->items = [];
 
         foreach ($items as $item) {
-            $this->items[$item['id']] = new AttributeItem(
-                $item['id'],
-                $item['displayValue'],
-                $item['value']
-            );
+            if ($item instanceof AttributeItem) {
+                // store object
+                $this->items[$item->getId()] = $item;
+            } else {
+                $this->items[$item['id']] = new AttributeItem(
+                    $item['id'],
+                    $item['displayValue'],
+                    $item['value']
+                );
+            }
         }
     }
 }
