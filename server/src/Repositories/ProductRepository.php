@@ -3,6 +3,9 @@
 namespace App\Repositories;
 
 use App\Core\Database;
+use App\Factories\ProductFactory;
+use App\Factories\AttributeFactory;
+use App\Models\Product\Product;
 use PDO;
 
 class ProductRepository
@@ -176,20 +179,111 @@ class ProductRepository
 
     public function findAll(): array
     {
-        $stmt = $this->pdo->query('SELECT * FROM products');
+        $stmt = $this->pdo->query("
+            SELECT p.*, c.name AS category_name
+            FROM products p
+            INNER JOIN categories c ON p.category_id = c.id
+        ");
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return array_map(fn($row) => ProductFactory::create(strtolower($row['category_name']), [
+            'id' => $row['id'],
+            'productUID' => $row['product_uid'],
+            'name' => $row['name'],
+            'inStock' => $row['in_stock'],
+            'brand' => $row['brand'],
+            'description' => $row['description'],
+            'gallery' => $this->getGallery($row['id']),
+            'attributes' => $this->getAttributes($row['id']),
+            'prices' => $this->getPrices($row['id'])
+        ]), $rows);
+    }
+
+    public function findById(int $id): ?Product
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT p.*, c.name AS category_name
+            FROM products p
+            INNER JOIN categories c ON p.category_id = c.id
+            WHERE p.id = :id
+            LIMIT 1
+        ");
+        $stmt->execute(['id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) return null;
+
+        // Pass the category name and row to the factory
+        return ProductFactory::create(strtolower($row['category_name']), [
+            'id'=> $row['id'],
+            'productUID' => $row['product_uid'],
+            'name' => $row['name'],
+            'inStock' => $row['in_stock'],
+            'brand' => $row['brand'],
+            'description' => $row['description'],
+            'gallery' => $this->getGallery($row['id']),
+            'attributes' => $this->getAttributes($row['id']),
+            'prices' => $this->getPrices($row['id'])
+        ]);
+    }
+
+    private function getGallery(int $productId): array
+    {
+        $stmt = $this->pdo->prepare("SELECT image_url FROM product_gallery WHERE product_id = :id");
+        $stmt->execute(['id' => $productId]);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    private function getPrices(int $productId): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT amount, currency_label AS label, currency_symbol AS symbol
+            FROM product_prices WHERE product_id = :id
+        ");
+        $stmt->execute(['id' => $productId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function findById(int $id): ?array
+    private function getAttributes(int $productId): array
     {
-        $stmt = $this->pdo->prepare('
-            SELECT *
-            FROM products
-            WHERE id = :id
-            LIMIT 1
-        ');
+        $stmt = $this->pdo->prepare("
+            SELECT 
+                pa.id AS attribute_id,
+                pa.name AS attribute_name,
+                pa.type AS attribute_type,
+                pai.attribute_item_id AS item_id,
+                pai.display_value AS item_display,
+                pai.attribute_item_value AS item_value
+            FROM product_attributes pa
+            LEFT JOIN product_attribute_items pai 
+                ON pa.id = pai.attribute_id
+            WHERE pa.product_id = :id
+        ");
+        $stmt->execute(['id' => $productId]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+        $attributes = [];
+
+        foreach ($rows as $row) {
+            $attrName = $row['attribute_name'];
+
+            if (!isset($attributes[$attrName])) {
+                $attributes[$attrName] = AttributeFactory::create($row['attribute_type'], [
+                    'id'    => $attrName,
+                    'name'  => $attrName,
+                    'items' => []
+                ]);
+            }
+
+            if ($row['item_id']) {
+                $attributes[$attrName]->setItems(array_merge($attributes[$attrName]->getItems(), [[
+                    'id' => $row['item_id'],
+                    'displayValue' => $row['item_display'],
+                    'value' => $row['item_value']
+                ]]));
+            }
+        }
+
+        return $attributes;
     }
 }
