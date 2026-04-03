@@ -6,11 +6,12 @@ use App\Models\Category\Category;
 
 abstract class Product
 {
-    protected string $id;
+    protected int $id;
     protected string $productUID;
     protected string $name;
     protected bool $inStock;
     protected string $categoryName;
+    protected int $categoryId;
     protected string $brand;
     protected string $description;
     protected array $gallery;
@@ -20,7 +21,7 @@ abstract class Product
     protected Category $categoryObject;
 
     public function __construct(
-        string $id,
+        int $id,
         string $productUID,
         string $name,
         bool $inStock,
@@ -37,6 +38,7 @@ abstract class Product
         $this->inStock = $inStock;
         $this->categoryObject = $categoryObject;
         $this->categoryName = $categoryObject->getName();
+        $this->categoryId = $categoryObject->getId();
         $this->brand = $brand;
         $this->description = $description;
         $this->gallery = $gallery;
@@ -51,7 +53,7 @@ abstract class Product
     abstract public function getType(): string;
 
     // Common getters
-    public function getId(): string 
+    public function getId(): int 
     { 
         return $this->id; 
     }
@@ -69,7 +71,7 @@ abstract class Product
         return $this->inStock; 
     }
 
-    public function getCategoryName(): string {
+    public function getProductCategoryName(): string {
         return $this->categoryName; 
     }
 
