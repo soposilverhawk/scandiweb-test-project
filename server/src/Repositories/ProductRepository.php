@@ -186,7 +186,7 @@ class ProductRepository
         ");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return array_map(fn($row) => ProductFactory::create(strtolower($row['category_name']), [
+        return array_map(fn($row) => ProductFactory::create($row['category_id'], strtolower($row['category_name']), [
             'id' => $row['id'],
             'productUID' => $row['product_uid'],
             'name' => $row['name'],
@@ -214,7 +214,7 @@ class ProductRepository
         if (!$row) return null;
 
         // Pass the category name and row to the factory
-        return ProductFactory::create(strtolower($row['category_name']), [
+        return ProductFactory::create($row['category_id'], strtolower($row['category_name']), [
             'id'=> $row['id'],
             'productUID' => $row['product_uid'],
             'name' => $row['name'],
