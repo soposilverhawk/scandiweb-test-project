@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Queries;
 
+use App\Models\Product\Product;
 use App\Services\Product\ProductService;
 
 class ProductQuery
@@ -17,7 +18,7 @@ class ProductQuery
         return $this->service->getAllProducts();
     }
 
-    public function getProductById(int $id): ?array {
+    public function getProductById(int $id): ?Product {
         return $this->service->getProduct($id);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services\Product;
 
+use App\Models\Product\Product;
 use App\Repositories\ProductRepository;
 
 class ProductService 
@@ -16,7 +17,7 @@ class ProductService
         return $this->repo->findAll();
     }
 
-    public function getProduct(int $id): ?array {
+    public function getProduct(int $id): ?Product {
         return $this->repo->findById($id);
     }
 }
