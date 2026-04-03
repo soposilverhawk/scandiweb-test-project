@@ -10,11 +10,11 @@ use App\Models\Category\AllCategory;
 class CategoryFactory
 {
     /**
-     * Create an Attribute instance based on type.
+     * Create a Category instance based on type.
      *
-     * @param string $type "text" or "swatch"
-     * @param array $data Attribute data: id, name, items
-     * @return Attribute
+     * @param int $id Category ID
+     * @param string $name Category name ('clothes', 'tech', 'all')
+     * @return Category
      * @throws \Exception
      */
     public static function create(int $id, string $name): Category
