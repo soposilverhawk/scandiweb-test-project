@@ -15,11 +15,23 @@ class AttributeType
         if (self::$instance === null) {
             self::$instance = new ObjectType([
                 'name' => 'Attribute',
-                'fields' => fn() => [
-                    'id' => Type::nonNull(Type::int()),
-                    'name' => Type::string(),
-                    'type' => Type::string(),
-                    'items' => Type::listOf(AttributeItemType::getType()),
+                'fields' => [
+                    'attribute_id' => [
+                        'type' => Type::string(),
+                        'resolve' => fn($attribute) => $attribute->getId()
+                    ],
+                    'name' => [
+                        'type' => Type::string(),
+                        'resolve' => fn($attribute) => $attribute->getName()
+                    ],
+                    'type' => [
+                        'type' => Type::string(),
+                        'resolve' => fn($attribute) => $attribute->getType()
+                    ],
+                    'product_attribute_items' => [
+                        'type' => Type::listOf(AttributeItemType::getType()),
+                        'resolve' => fn($attribute) => $attribute->getItems()
+                    ]
                 ],
             ]);
         }
