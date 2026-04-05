@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Resolvers;
 
-use App\GraphQL\Queries\CategoryQuery;
+use App\Services\Category\CategoryQuery;
 
 class CategoryResolver
 {

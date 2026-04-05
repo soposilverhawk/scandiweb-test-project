@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Resolvers;
 
-use App\GraphQL\Queries\ProductQuery;
+use App\Services\Product\ProductQuery;
 use App\Transformers\ProductTransformer;
 
 class ProductResolver
