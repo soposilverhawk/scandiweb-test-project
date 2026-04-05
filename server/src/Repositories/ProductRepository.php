@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Core\Database;
 use App\Factories\ProductFactory;
 use App\Factories\AttributeFactory;
+use App\Factories\PriceFactory;
 use App\Models\Product\Product;
 use PDO;
 
@@ -237,11 +238,15 @@ class ProductRepository
     private function getPrices(int $productId): array
     {
         $stmt = $this->pdo->prepare("
-            SELECT amount, currency_label AS label, currency_symbol AS symbol
+            SELECT amount, currency_label, currency_symbol
             FROM product_prices WHERE product_id = :id
         ");
         $stmt->execute(['id' => $productId]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return array_map(
+            fn($row) => PriceFactory::create($row), $rows
+        );
     }
 
     private function getAttributes(int $productId): array
