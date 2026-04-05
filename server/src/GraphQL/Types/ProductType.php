@@ -10,9 +10,9 @@ use App\GraphQL\Types\AttributeType;
 class ProductType {
     private static ?ObjectType $instance = null;
 
-public static function getType(): ObjectType {
-    if (self::$instance === null) {
-        self::$instance = new ObjectType([
+    public static function getType(): ObjectType {
+        if (self::$instance === null) {
+            self::$instance = new ObjectType([
             'name' => 'Product',
             'fields' => function () {
                 return [
@@ -48,5 +48,5 @@ public static function getType(): ObjectType {
     }
 
     return self::$instance;
-}
+    }
 }
