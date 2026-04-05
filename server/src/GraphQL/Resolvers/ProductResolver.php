@@ -3,6 +3,7 @@
 namespace App\GraphQL\Resolvers;
 
 use App\GraphQL\Queries\ProductQuery;
+use App\Transformers\ProductTransformer;
 
 class ProductResolver
 {
@@ -15,11 +16,15 @@ class ProductResolver
 
     public function products(): array
     {
-        return $this->query->getProducts();
+        return array_map(
+            fn($product) => ProductTransformer::toArray($product),
+            $this->query->getProducts()
+        );
     }
 
     public function product($root, array $args): ?array
     {
-        return $this->query->getProductById($args['id']);
+        $product = $this->query->getProductById($args['id']);
+        return $product ? ProductTransformer::toArray($product) : null;
     }
 }
