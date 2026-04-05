@@ -1,6 +1,6 @@
 <?php
 
-namespace App\GraphQL\Queries;
+namespace App\Services\Product;
 
 use App\Models\Product\Product;
 use App\Services\Product\ProductService;

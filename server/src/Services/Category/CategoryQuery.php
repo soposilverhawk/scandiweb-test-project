@@ -1,6 +1,6 @@
 <?php
 
-namespace App\GraphQL\Queries;
+namespace App\Services\Category;
 
 use App\Services\Category\CategoryService;
 use App\Models\Category\Category;
