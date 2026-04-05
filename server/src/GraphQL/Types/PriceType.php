@@ -15,9 +15,18 @@ class PriceType
             self::$instance = new ObjectType([
                 'name' => 'Price',
                 'fields' => [
-                    'amount' => Type::nonNull(Type::float()),
-                    'currency_label' => Type::string(),
-                    'currency_symbol' => Type::string(),
+                    'amount' => [
+                        'type' => Type::nonNull(Type::float()),
+                        'resolve' => fn($price) => $price->getAmount()
+                    ],
+                    'currency_label' => [
+                        'type' => Type::string(),
+                        'resolve' => fn($price) => $price->getCurrencyLabel()
+                    ],
+                    'currency_symbol' => [
+                        'type' => Type::string(),
+                        'resolve' => fn($price) => $price->getCurrencySymbol()
+                    ]
                 ],
             ]);
         }
