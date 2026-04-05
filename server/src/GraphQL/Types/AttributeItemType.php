@@ -15,9 +15,18 @@ class AttributeItemType
             self::$instance = new ObjectType([
                 'name' => 'AttributeItem',
                 'fields' => [
-                    'id' => Type::nonNull(Type::int()),
-                    'display' => Type::string(),
-                    'value' => Type::string(),
+                    'display_value' => [
+                        'type' => Type::string(),
+                        'resolve' => fn($attributeItem) => $attributeItem->getDisplayValue(),
+                    ],
+                    'attribute_item_value' => [
+                        'type' => Type::string(),
+                        'resolve' => fn($attributeItem) => $attributeItem->getValue()
+                    ],
+                    'attribute_item_id' => [
+                        'type' => Type::string(),
+                        'resolve' => fn($attributeItem) => $attributeItem->getId()
+                    ]
                 ],
             ]);
         }
