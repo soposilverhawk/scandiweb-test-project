@@ -3,6 +3,7 @@
 namespace App\GraphQL\Resolvers;
 
 use App\Services\Category\CategoryQuery;
+use App\Transformers\CategoryTransformer;
 
 class CategoryResolver
 {
@@ -15,21 +16,16 @@ class CategoryResolver
 
     public function categories(): array
     {
-        return array_map(fn($category) => [
-            'id' => $category->getId(),
-            'name' => $category->getName(),
-        ], $this->query->getCategories());
+        return array_map(
+            fn($category) => CategoryTransformer::toArray($category),
+            $this->query->getCategories()
+        );
     }
 
     public function category($root, array $args): ?array
     {
         $category = $this->query->getCategoryById($args['id']);
-        
         if (!$category) return null;
-
-        return [
-            'id' => $category->getId(),
-            'name' => $category->getName(),
-        ];
+        return $category ? CategoryTransformer::toArray($category) : null;
     }
 }
