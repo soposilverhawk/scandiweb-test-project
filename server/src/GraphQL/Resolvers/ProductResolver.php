@@ -25,6 +25,7 @@ class ProductResolver
     public function product($root, array $args): ?array
     {
         $product = $this->query->getProductById($args['id']);
+        if (!$product) return null;
         return $product ? ProductTransformer::toArray($product) : null;
     }
 }
