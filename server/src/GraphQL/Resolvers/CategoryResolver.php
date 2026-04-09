@@ -2,29 +2,29 @@
 
 namespace App\GraphQL\Resolvers;
 
-use App\Services\Category\CategoryQuery;
+use App\Services\Category\CategoryService;
 use App\Transformers\CategoryTransformer;
 
 class CategoryResolver
 {
-    private CategoryQuery $query;
+    private CategoryService $service;
 
-    public function __construct(CategoryQuery $query)
+    public function __construct(CategoryService $service)
     {
-        $this->query = $query;
+        $this->service = $service;
     }
 
     public function categories(): array
     {
         return array_map(
             fn($category) => CategoryTransformer::toArray($category),
-            $this->query->getCategories()
+            $this->service->getAllCategories()
         );
     }
 
     public function category($root, array $args): ?array
     {
-        $category = $this->query->getCategoryById($args['id']);
+        $category = $this->service->getCategory($args['id']);
         if (!$category) return null;
         return $category ? CategoryTransformer::toArray($category) : null;
     }

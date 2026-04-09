@@ -9,7 +9,6 @@ use App\GraphQL\Resolvers\ProductResolver;
 use App\Repositories\CategoryRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
-use App\Services\Category\CategoryQuery;
 use App\Services\Category\CategoryService;
 use App\Services\Order\OrderService;
 use App\Services\Product\ProductQuery;
@@ -32,8 +31,7 @@ class ResolverFactory
         $db = self::getDatabase();
         $repo = new CategoryRepository($db);
         $service = new CategoryService($repo);
-        $query = new CategoryQuery($service);
-        return new CategoryResolver($query);
+        return new CategoryResolver($service);
     }
 
     public static function makeProductResolver(): ProductResolver
