@@ -4,11 +4,14 @@ namespace App\GraphQL\ResolverFactory;
 
 use App\Core\Database;
 use App\GraphQL\Resolvers\CategoryResolver;
+use App\GraphQL\Resolvers\OrderResolver;
 use App\GraphQL\Resolvers\ProductResolver;
 use App\Repositories\CategoryRepository;
+use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
 use App\Services\Category\CategoryQuery;
 use App\Services\Category\CategoryService;
+use App\Services\Order\OrderService;
 use App\Services\Product\ProductQuery;
 use App\Services\Product\ProductService;
 
@@ -40,5 +43,15 @@ class ResolverFactory
         $service = new ProductService($repo);
         $query = new ProductQuery($service);
         return new ProductResolver($query);
+    }
+
+    public static function makeOrderResolver(): OrderResolver
+    {
+        $db = self::getDatabase();
+        $orderRepo = new OrderRepository($db);
+        $productRepo = new ProductRepository($db);
+        $productService = new ProductService($productRepo);
+        $orderService = new OrderService($orderRepo, $productService);
+        return new OrderResolver($orderService, $productService);
     }
 }
