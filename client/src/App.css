@@ -1,0 +1,10 @@
+:root {
+    /* color scheme */
+    --primary-color: #5ECE7B;
+
+    /* typography */
+    --heading-main-size: 4.2rem;
+    --text-standard-size: 1.6rem;
+    --product-details-text: 1.8rem;
+    --out-of-stock-text-size: 2.4rem;
+}
