@@ -8,12 +8,15 @@ use App\GraphQL\Resolvers\CategoryResolver;
 use App\GraphQL\Resolvers\ProductResolver;
 use App\GraphQL\Queries\CategoryGraphQLQuery;
 use App\GraphQL\Queries\ProductGraphQLQuery;
+use App\GraphQL\Mutations\OrderGraphQLMutation;
+use App\GraphQL\Resolvers\OrderResolver;
 
 class GraphQLSchema
 {
     public static function build(
         CategoryResolver $categoryResolver,
-        ProductResolver $productResolver
+        ProductResolver $productResolver,
+        OrderResolver $orderResolver
     ): Schema {
         $queryType = new ObjectType([
             'name' => 'Query',
@@ -25,7 +28,9 @@ class GraphQLSchema
 
         $mutationType = new ObjectType([
             'name' => 'Mutation',
-            'fields' => [] // to be added once mutations are built out
+            'fields' => array_merge(
+                OrderGraphQLMutation::getFields($orderResolver)
+            )
         ]);
 
         return new Schema([
