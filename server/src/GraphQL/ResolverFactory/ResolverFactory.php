@@ -11,7 +11,6 @@ use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
 use App\Services\Category\CategoryService;
 use App\Services\Order\OrderService;
-use App\Services\Product\ProductQuery;
 use App\Services\Product\ProductService;
 
 class ResolverFactory
@@ -39,8 +38,7 @@ class ResolverFactory
         $db = self::getDatabase();
         $repo = new ProductRepository($db);
         $service = new ProductService($repo);
-        $query = new ProductQuery($service);
-        return new ProductResolver($query);
+        return new ProductResolver($service);
     }
 
     public static function makeOrderResolver(): OrderResolver
