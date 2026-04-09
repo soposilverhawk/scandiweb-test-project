@@ -15,7 +15,8 @@ class GraphQL
         try {
             $categoryResolver = ResolverFactory::makeCategoryResolver();
             $productResolver = ResolverFactory::makeProductResolver();
-            $schema = GraphQLSchema::build($categoryResolver, $productResolver);
+            $orderResolver = ResolverFactory::makeOrderResolver();
+            $schema = GraphQLSchema::build($categoryResolver, $productResolver, $orderResolver);
 
             $rawInput = file_get_contents('php://input');
             if ($rawInput === false) {
