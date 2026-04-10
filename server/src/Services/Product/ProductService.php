@@ -20,4 +20,9 @@ class ProductService
     public function getProduct(int $id): ?Product {
         return $this->repo->findById($id);
     }
+
+    public function getProductsByCategory(string $category): array
+    {
+        return $this->repo->findByCategory($category);
+    }
 }

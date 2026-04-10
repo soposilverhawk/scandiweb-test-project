@@ -14,11 +14,17 @@ class ProductResolver
         $this->service = $service;
     }
 
-    public function products(): array
+    public function products($root, array $args): array
     {
+        $category = $args['category'] ?? 'all';
+
+        $products = $category === 'all'
+            ? $this->service->getAllProducts()
+            : $this->service->getProductsByCategory($category);
+
         return array_map(
             fn($product) => ProductTransformer::toArray($product),
-            $this->service->getAllProducts()
+            $products
         );
     }
 

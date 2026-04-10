@@ -13,6 +13,9 @@ class ProductGraphQLQuery
         return [
             'products' => [
                 'type' => Type::listOf(ProductType::getType()),
+                'args' => [
+                    'category' => Type::string()
+                ],
                 'resolve' => [$resolver, 'products']
             ],
             'product' => [
