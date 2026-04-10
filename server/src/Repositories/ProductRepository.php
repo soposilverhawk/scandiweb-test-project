@@ -291,4 +291,33 @@ class ProductRepository
 
         return $attributes;
     }
+
+    public function findByCategory(string $category): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT p.*, c.name AS category_name
+            FROM products p
+            INNER JOIN categories c ON p.category_id = c.id
+            WHERE LOWER(c.name) = LOWER(:category)
+        ");
+
+        $stmt->execute(['category' => $category]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return array_map(fn($row) => ProductFactory::create(
+            $row['category_id'],
+            strtolower($row['category_name']),
+            [
+                'id' => $row['id'],
+                'productUID' => $row['product_uid'],
+                'name' => $row['name'],
+                'inStock' => $row['in_stock'],
+                'brand' => $row['brand'],
+                'description' => $row['description'],
+                'gallery' => $this->getGallery($row['id']),
+                'attributes' => $this->getAttributes($row['id']),
+                'prices' => $this->getPrices($row['id'])
+            ]
+        ), $rows);
+    }
 }
