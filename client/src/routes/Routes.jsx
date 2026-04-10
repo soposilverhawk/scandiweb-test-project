@@ -1,8 +1,6 @@
 const ROUTES = {
   HOME: "/",
-  ALL: "/all",
-  CLOTHES: "/clothes",
-  TECH: "/tech",
+  CATEGORY: "/category/:categoryName",
   PRODUCTDETAILSPAGE: "/product/:id",
 };
 

@@ -1,16 +1,13 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ROUTES from "./Routes";
-import Home from "../pages/home/Home";
-import ClothesProductsListing from "../pages/clothesProductsListing/ClothesProductsListing";
-import TechProductsListing from "../pages/techProductsListing/TechProductsListing";
+import CategoryPage from "../pages/CategoryPage";
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route path={ROUTES.HOME} element={<Home />} />
-      <Route path={ROUTES.CLOTHES} element={<ClothesProductsListing />} />
-      <Route path={ROUTES.TECH} element={<TechProductsListing />} />
+      <Route path={ROUTES.HOME} element={<Navigate to="/category/all" />} />
+      <Route path={ROUTES.CATEGORY} element={<CategoryPage />} />
     </Routes>
   );
 }
