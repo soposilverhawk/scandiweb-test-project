@@ -6,7 +6,7 @@ export const StyledActionButton = styled.button`
   align-items: center;
   padding: 1.6rem 3.2rem;
   background-color: var(--primary-color);
-  color: ${({ $variant }) => ($variant === "add-to-cart" ? "red" : "cyan")};
+  color: #fff;
   font-size: ${({ $variant }) =>
     $variant === "add-to-cart" ? "1.6rem" : "1.4rem"};
   text-transform: uppercase;
