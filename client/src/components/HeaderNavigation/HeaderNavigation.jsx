@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import capitalizeString from "../../utils/capitalizeString";
 
 const GET_CATEGORIES = gql`
-  query {
+  query GetCategories{
     categories {
       id
       name
