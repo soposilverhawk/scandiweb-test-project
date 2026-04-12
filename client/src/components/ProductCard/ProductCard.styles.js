@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import { QuickShopCartButton } from "../Shared/CartButton.styles";
+import { QuickShopCartButton } from "../Shared/CartButton/CartButton.styles";
 
 const flexColumn = css`
   display: flex;
