@@ -11,6 +11,7 @@ import {
   OutOfStockMessage,
 } from "./ProductCard.styles";
 import QuickShopButton from "../Shared/CartButton";
+import formatStringToKebabCase from "../../utils/formatStringToKebabCase";
 
 {
   /* Each product card needs to display the following:
@@ -53,7 +54,7 @@ function ProductCard({
   };
 
   return (
-    <ProductListItem>
+    <ProductListItem data-testid={`product-${formatStringToKebabCase(name)}`}>
       <ProductLink to={`/product/${id}`}>
         <ProductImageContainer>
           <ProductImage src={image} alt={name} />
@@ -69,9 +70,7 @@ function ProductCard({
           )}
         </ProductImageContainer>
         <ProductInformationContainer $isInStock={isInStock}>
-          <ProductInformationBase>
-            {name}
-          </ProductInformationBase>
+          <ProductInformationBase>{name}</ProductInformationBase>
           <ProductInformationPrice>
             {`${preferredPriceCurrency}${amount}`}
           </ProductInformationPrice>
