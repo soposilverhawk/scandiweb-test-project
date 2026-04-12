@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { QuickShopCartButton } from "../Shared/CartButton.styles";
 
 const flexColumn = css`
   display: flex;
@@ -18,6 +19,11 @@ export const ProductListItem = styled.li`
   &:hover {
     box-shadow: 0 0.4rem 3rem 0 var(--tertiary-color);
   }
+
+  &:hover ${QuickShopCartButton} {
+    opacity: 1;
+    visibility: visible;
+  }
 `;
 
 export const ProductLink = styled(Link)`
@@ -25,9 +31,14 @@ export const ProductLink = styled(Link)`
   gap: 1rem;
 `;
 
+export const ProductImageContainer = styled.div`
+  height: 40rem;
+  position: relative;
+`;
+
 export const ProductImage = styled.img`
   width: 100%;
-  height: 40rem;
+  height: 100%;
   object-fit: cover;
   object-position: 50% 10%;
 `;

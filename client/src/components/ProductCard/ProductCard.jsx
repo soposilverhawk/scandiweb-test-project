@@ -2,11 +2,13 @@ import React, { useMemo } from "react";
 import {
   ProductListItem,
   ProductLink,
+  ProductImageContainer,
   ProductImage,
   ProductInformationContainer,
   ProductInformationBase,
   ProductInformationPrice,
 } from "./ProductCard.styles";
+import QuickShopButton from "../Shared/CartButton";
 
 {
   /* Each product card needs to display the following:
@@ -39,12 +41,27 @@ function ProductCard({
 
   const preferredPriceCurrency = "$";
   const amount =
-    pricesMap[preferredPriceCurrency] ?? Object.values(pricesMap[0]);
+    pricesMap[preferredPriceCurrency] ?? Object.values(pricesMap)[0];
+
+  const handleQuickShop = (e, productReference) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("clicked product:", productReference);
+    // implement the quick shop functionality
+  };
 
   return (
-    <ProductListItem key={`${productUid}`}>
+    <ProductListItem>
       <ProductLink to={`/product/${id}`}>
-        <ProductImage src={image} alt={name} />
+        <ProductImageContainer>
+          <ProductImage src={image} alt={name} />
+          {isInStock && (
+            <QuickShopButton
+              variant="quickshop"
+              onClick={(e) => handleQuickShop(e, productUid)}
+            />
+          )}
+        </ProductImageContainer>
         <ProductInformationContainer>
           <ProductInformationBase>{name}</ProductInformationBase>
           <ProductInformationPrice>

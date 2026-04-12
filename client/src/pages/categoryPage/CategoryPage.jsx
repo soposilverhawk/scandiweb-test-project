@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
 import { useParams } from "react-router-dom";
@@ -40,13 +40,15 @@ function CategoryPage() {
       <CategoryHeading>{capitalizeString(categoryName)}</CategoryHeading>
       <ProductsContainer>
         {data.products.map(
-          ({ name, product_gallery, product_prices, product_uid, id }) => (
+          ({ name, product_gallery, product_prices, product_uid, id, in_stock }) => (
             <ProductCard
               name={name}
               image={product_gallery[0]}
               productPrices={product_prices}
-              key={product_uid}
+              productUid={product_uid}
               id={id}
+              isInStock={in_stock}
+              key={product_uid}
             />
           ),
         )}
