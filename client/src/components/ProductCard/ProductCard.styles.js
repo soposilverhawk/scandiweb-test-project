@@ -45,14 +45,15 @@ export const ProductImage = styled.img`
 `;
 
 export const ProductInformationContainer = styled.div`
-  ${flexColumn}
+  ${flexColumn};
+  color: ${({ $isInStock }) =>
+    $isInStock ? "var(--secondary-color)" : "var(--out-of-stock-color)"};
   gap: 0.5rem;
+  font-size: var(--product-details-text);
 `;
 
 export const ProductInformationBase = styled.p`
-  font-size: var(--product-details-text);
-  color: var(--secondary-color);
-  font-weight: w00;
+  font-weight: 300;
 `;
 
 export const ProductInformationPrice = styled(ProductInformationBase)`
@@ -65,7 +66,7 @@ export const OutOfStockOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   opacity: 0.5;
   display: flex;
   justify-content: center;

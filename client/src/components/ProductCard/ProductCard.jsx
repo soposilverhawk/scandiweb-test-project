@@ -68,8 +68,10 @@ function ProductCard({
             </OutOfStockOverlay>
           )}
         </ProductImageContainer>
-        <ProductInformationContainer>
-          <ProductInformationBase>{name}</ProductInformationBase>
+        <ProductInformationContainer $isInStock={isInStock}>
+          <ProductInformationBase>
+            {name}
+          </ProductInformationBase>
           <ProductInformationPrice>
             {`${preferredPriceCurrency}${amount}`}
           </ProductInformationPrice>
