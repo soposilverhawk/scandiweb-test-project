@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
 import { useParams } from "react-router-dom";
@@ -17,7 +17,6 @@ const GET_PRODUCTS_BY_CATEGORY = gql`
       product_uid
       name
       in_stock
-      category_name
       product_gallery
       product_prices {
         amount
@@ -32,10 +31,6 @@ function CategoryPage() {
   const { loading, error, data } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
     variables: { category: categoryName },
   });
-
-  useEffect(() => {
-    console.log(categoryName);
-  }, [data]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
