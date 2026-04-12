@@ -57,3 +57,21 @@ export const ProductInformationBase = styled.p`
 export const ProductInformationPrice = styled(ProductInformationBase)`
   font-weight: 400;
 `;
+
+export const OutOfStockOverlay = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #FFFFFF;
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const OutOfStockMessage = styled.p`
+  font-size: var(--out-of-stock-text-size);
+  color: black;
+`;

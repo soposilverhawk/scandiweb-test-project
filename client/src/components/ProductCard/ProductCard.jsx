@@ -7,6 +7,8 @@ import {
   ProductInformationContainer,
   ProductInformationBase,
   ProductInformationPrice,
+  OutOfStockOverlay,
+  OutOfStockMessage,
 } from "./ProductCard.styles";
 import QuickShopButton from "../Shared/CartButton";
 
@@ -55,11 +57,15 @@ function ProductCard({
       <ProductLink to={`/product/${id}`}>
         <ProductImageContainer>
           <ProductImage src={image} alt={name} />
-          {isInStock && (
+          {isInStock ? (
             <QuickShopButton
               variant="quickshop"
               onClick={(e) => handleQuickShop(e, productUid)}
             />
+          ) : (
+            <OutOfStockOverlay>
+              <OutOfStockMessage>OUT OF STOCK</OutOfStockMessage>
+            </OutOfStockOverlay>
           )}
         </ProductImageContainer>
         <ProductInformationContainer>
