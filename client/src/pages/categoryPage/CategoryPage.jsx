@@ -8,6 +8,7 @@ import {
   ProductsContainer,
 } from "./CategoryPage.styles";
 import capitalizeString from "../../utils/capitalizeString";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 const GET_PRODUCTS_BY_CATEGORY = gql`
   query GetProductsByCategory($category: String!) {
@@ -43,7 +44,17 @@ function CategoryPage() {
     <CategoryPageContainer>
       <CategoryHeading>{capitalizeString(categoryName)}</CategoryHeading>
       <ProductsContainer>
-        
+        {data.products.map(
+          ({ name, product_gallery, product_prices, product_uid, id }) => (
+            <ProductCard
+              name={name}
+              image={product_gallery[0]}
+              productPrices={product_prices}
+              key={product_uid}
+              id={id}
+            />
+          ),
+        )}
       </ProductsContainer>
     </CategoryPageContainer>
   );
