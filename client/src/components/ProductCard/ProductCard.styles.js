@@ -23,6 +23,7 @@ export const ProductListItem = styled.li`
   &:hover ${QuickShopCartButton} {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
   }
 `;
 

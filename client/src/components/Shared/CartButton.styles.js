@@ -26,6 +26,7 @@ export const QuickShopCartButton = styled(ButtonBase)`
   opacity: 0;
   visibility: hidden;
   transition: transform 0.2s ease;
+  pointer-events: none;
 
   &:hover {
     transform: scale(1.2);
