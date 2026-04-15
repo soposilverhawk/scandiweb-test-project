@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const CarouselContainer = styled.div`
-  max-width: 57.5rem;
   width: 100%;
   position: relative;
   background-image: ${({ $activeImg }) => `url(${$activeImg})`};
