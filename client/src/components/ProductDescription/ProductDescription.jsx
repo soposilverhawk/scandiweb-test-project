@@ -38,7 +38,7 @@ function ProductDescription({
         />
         <StyledAttributesContainer $variant={variant}>
           <p>Price:</p>
-          <ProductPriceDisplay>{`${currency}${amount}`}</ProductPriceDisplay>
+          <ProductPriceDisplay $variant={variant}>{`${currency}${amount}`}</ProductPriceDisplay>
         </StyledAttributesContainer>
         <ActionButton>Add to cart</ActionButton>
         <ProductDescriptionDisplay>
