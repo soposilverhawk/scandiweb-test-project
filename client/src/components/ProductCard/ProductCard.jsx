@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import {
   ProductListItem,
   ProductLink,
@@ -12,6 +12,7 @@ import {
 } from "./ProductCard.styles";
 import QuickShopButton from "../Shared/CartButton/CartButton";
 import formatStringToKebabCase from "../../utils/formatStringToKebabCase";
+import { usePricesMap } from "../../hooks/usePricesMap";
 
 {
   /* Each product card needs to display the following:
@@ -44,21 +45,7 @@ function ProductCard({
   productUid,
   id,
 }) {
-  const pricesMap = useMemo(() => {
-    return Object.fromEntries(
-      productPrices.map((price) => [price.currency_symbol, price.amount]),
-    );
-  }, [productPrices]);
-
-  const preferredPriceCurrency = "$";
-  const amount =
-    pricesMap[preferredPriceCurrency] ?? Object.values(pricesMap)[0];
-
-  const handleQuickShop = (e, productReference) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log("clicked product:", productReference);
-  };
+  const { amount, currency } = usePricesMap(productPrices);
 
   return (
     <ProductListItem data-testid={`product-${formatStringToKebabCase(name)}`}>
@@ -79,7 +66,7 @@ function ProductCard({
         <ProductInformationContainer $isInStock={isInStock}>
           <ProductInformationBase>{name}</ProductInformationBase>
           <ProductInformationPrice>
-            {`${preferredPriceCurrency}${amount}`}
+            {`${currency}${amount}`}
           </ProductInformationPrice>
         </ProductInformationContainer>
       </ProductLink>

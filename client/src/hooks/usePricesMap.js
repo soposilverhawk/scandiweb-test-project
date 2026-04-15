@@ -15,7 +15,7 @@ export function usePricesMap(productPrices, preferredCurrency = "$") {
         preferredCurrency in pricesMap
           ? preferredCurrency
           : Object.keys(pricesMap)[0],
-      pricesMap, // optional, if you still need it
+      pricesMap,
     };
   }, [productPrices, preferredCurrency]);
 }
