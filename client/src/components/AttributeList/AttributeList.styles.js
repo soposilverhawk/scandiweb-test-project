@@ -6,6 +6,7 @@ export const StyledAttributesContainer = styled.div`
   gap: 0.8rem;
   font-size: ${({ $variant }) =>
     $variant === "pdp" ? "var(--product-details-text)" : "1.4rem"};
+  font-weight: ${({ $variant }) => ($variant === "pdp" ? 700 : 300)};
 `;
 
 export const AttributeSelectablesContainer = styled.ul`
