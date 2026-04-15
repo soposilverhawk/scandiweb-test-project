@@ -6,8 +6,7 @@ import {
 import prevArrow from "../../assets/galleryCarousel/prev-arrow.png";
 import nextArrow from "../../assets/galleryCarousel/next-arrow.png";
 
-function ProductGalleryCarousel({ productGallery }) {
-  const [activeImgIndex, setActiveImgIndex] = useState(0);
+function ProductGalleryCarousel({ productGallery, activeImgIndex, setActiveImgIndex }) {
   const activeImg = productGallery?.[activeImgIndex];
   const handleNavigation = (direction) => {
     if (!productGallery?.length) return;

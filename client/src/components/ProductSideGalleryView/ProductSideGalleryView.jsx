@@ -5,11 +5,14 @@ import {
   ProductImage,
 } from "./ProductSideGallery.styles";
 
-function ProductSideGalleryView({ productGallery }) {
+function ProductSideGalleryView({ productGallery, setActiveImgIndex }) {
   return (
     <ProductSideGalleryContainer>
       {productGallery?.map((image, idx) => (
-        <ProductImageButton key={`product-img-${idx++}`}>
+        <ProductImageButton
+          key={`product-img-${idx}`}
+          onClick={() => setActiveImgIndex(idx)}
+        >
           <ProductImage src={image} />
         </ProductImageButton>
       ))}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { act, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
@@ -47,6 +47,8 @@ function ProductDetailsPage() {
       id: Number(id),
     },
   });
+  const [activeImgIndex, setActiveImgIndex] = useState(0);
+  const productGallery = data?.product?.product_gallery || [];
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -54,9 +56,14 @@ function ProductDetailsPage() {
   return (
     <ProductPageSection>
       <GalleryViewContainer>
-        <ProductSideGallery productGallery={data?.product?.product_gallery} />
+        <ProductSideGallery
+          productGallery={productGallery}
+          setActiveImgIndex={setActiveImgIndex}
+        />
         <ProductGalleryCarousel
-          productGallery={data?.product?.product_gallery}
+          productGallery={productGallery}
+          activeImgIndex={activeImgIndex}
+          setActiveImgIndex={setActiveImgIndex}
         />
       </GalleryViewContainer>
       <ProductDescription
