@@ -22,6 +22,7 @@ export const NavigationButton = styled.button`
   align-items: center;
   cursor: pointer;
   transition: transform 0.2s ease;
+  border: none;
 
   &:hover {
     transform: scale(1.2);
