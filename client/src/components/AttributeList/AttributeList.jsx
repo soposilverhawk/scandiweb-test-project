@@ -3,7 +3,9 @@ import {
   StyledAttributesContainer,
   AttributeSelectable,
   AttributeSelectablesContainer,
+  AttributeContainer,
 } from "./AttributeList.styles";
+import formatStringToKebabCase from "../../utils/formatStringToKebabCase";
 
 function AttributeList({ variant = "pdp", productAttributesData }) {
   return (
@@ -11,7 +13,7 @@ function AttributeList({ variant = "pdp", productAttributesData }) {
       <StyledAttributesContainer $variant={variant}>
         {productAttributesData?.map(
           ({ attribute_id, name, product_attribute_items, type }) => (
-            <>
+            <AttributeContainer data-testid={`product-attribute-${formatStringToKebabCase(name)}`}>
               <h2>{name}:</h2>
               <AttributeSelectablesContainer key={attribute_id}>
                 {product_attribute_items?.map(
@@ -26,7 +28,7 @@ function AttributeList({ variant = "pdp", productAttributesData }) {
                   ),
                 )}
               </AttributeSelectablesContainer>
-            </>
+            </AttributeContainer>
           ),
         )}
       </StyledAttributesContainer>

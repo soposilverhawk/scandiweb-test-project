@@ -3,10 +3,16 @@ import styled, { css } from "styled-components";
 export const StyledAttributesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 5rem;
   font-size: ${({ $variant }) =>
     $variant === "pdp" ? "var(--product-details-text)" : "1.4rem"};
   font-weight: ${({ $variant }) => ($variant === "pdp" ? 700 : 300)};
+`;
+
+export const AttributeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 `;
 
 export const AttributeSelectablesContainer = styled.ul`
