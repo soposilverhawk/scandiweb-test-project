@@ -8,7 +8,7 @@ import {
 function AttributeList({ variant = "pdp", productAttributesData }) {
   return (
     productAttributesData.length !== 0 && (
-      <StyledAttributesContainer>
+      <StyledAttributesContainer $variant={variant}>
         {productAttributesData?.map(
           ({ attribute_id, name, product_attribute_items, type }) => (
             <>
