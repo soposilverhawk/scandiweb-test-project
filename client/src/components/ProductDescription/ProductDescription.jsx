@@ -40,8 +40,8 @@ function ProductDescription({
           <p>Price:</p>
           <ProductPriceDisplay $variant={variant}>{`${currency}${amount}`}</ProductPriceDisplay>
         </StyledAttributesContainer>
-        <ActionButton>Add to cart</ActionButton>
-        <ProductDescriptionDisplay>
+        <ActionButton variant="add-to-cart">Add to cart</ActionButton>
+        <ProductDescriptionDisplay data-testid="product-description">
           {parsedProductDescription}
         </ProductDescriptionDisplay>
       </ProductDescriptionContainer>

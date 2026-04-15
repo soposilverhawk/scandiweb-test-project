@@ -7,7 +7,7 @@ import {
 
 function ProductSideGalleryView({ productGallery, setActiveImgIndex }) {
   return (
-    <ProductSideGalleryContainer>
+    <ProductSideGalleryContainer data-testid="product-gallery">
       {productGallery?.map((image, idx) => (
         <ProductImageButton
           key={`product-img-${idx}`}
