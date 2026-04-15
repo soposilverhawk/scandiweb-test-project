@@ -9,6 +9,7 @@ import AttributeList from "../AttributeList/AttributeList";
 import ActionButton from "../Shared/ActionButton/ActionButton";
 import { usePricesMap } from "../../hooks/usePricesMap";
 import { StyledAttributesContainer } from "../AttributeList/AttributeList.styles";
+import { useParseHTML } from "../../hooks/useParseHTML";
 
 function ProductDescription({
   variant,
@@ -18,6 +19,7 @@ function ProductDescription({
   productDescription,
 }) {
   const { amount, currency } = usePricesMap(productPrices);
+  const parsedProductDescription = useParseHTML(productDescription);
 
   return (
     <>
@@ -40,7 +42,7 @@ function ProductDescription({
         </StyledAttributesContainer>
         <ActionButton>Add to cart</ActionButton>
         <ProductDescriptionDisplay>
-          description goes here, create parser for html
+          {parsedProductDescription}
         </ProductDescriptionDisplay>
       </ProductDescriptionContainer>
     </>

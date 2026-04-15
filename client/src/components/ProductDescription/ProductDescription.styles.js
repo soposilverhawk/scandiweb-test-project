@@ -22,6 +22,6 @@ export const ProductPriceDisplay = styled.span`
   font-weight: 700;
 `;
 
-export const ProductDescriptionDisplay = styled.p`
+export const ProductDescriptionDisplay = styled.div`
   font-size: var(--text-standard-size);
 `;
