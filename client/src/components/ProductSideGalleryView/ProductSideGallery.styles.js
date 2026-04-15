@@ -2,10 +2,20 @@ import styled from "styled-components";
 
 export const ProductSideGalleryContainer = styled.div`
   max-width: 8rem;
-  max-height: 47.8rem;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* Chrome, Safari, Edge */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ProductImageButton = styled.button`
