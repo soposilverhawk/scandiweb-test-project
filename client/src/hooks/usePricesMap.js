@@ -4,7 +4,13 @@ import createPricesMap from "../utils/createPricesMap";
 
 export function usePricesMap(productPrices, preferredCurrency = "$") {
   return useMemo(() => {
-    if (!productPrices?.length) return null;
+    if (!productPrices?.length) {
+      return {
+        amount: 0,
+        currency: preferredCurrency,
+        pricesMap: {},
+      }
+    }
 
     const pricesMap = createPricesMap(productPrices);
     const amount = pricesMap[preferredCurrency] ?? Object.values(pricesMap)[0];
