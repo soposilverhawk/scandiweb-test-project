@@ -3,7 +3,11 @@ import { StyledActionButton } from "./ActionButton.styles";
 
 function ActionButton({ variant, children, onclick }) {
   return (
-    <StyledActionButton $variant={variant} onClick={onclick}>
+    <StyledActionButton
+      $variant={variant}
+      onClick={onclick}
+      data-testid={variant === "add-to-cart" ? "add-to-cart" : null}
+    >
       {children}
     </StyledActionButton>
   );
