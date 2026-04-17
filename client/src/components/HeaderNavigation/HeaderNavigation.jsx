@@ -1,18 +1,10 @@
 import React from "react";
-import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
 import { StyledUL, StyledListItem } from "./HeaderNavigation.styles";
 import { Link, useLocation } from "react-router-dom";
 import capitalizeString from "../../utils/capitalizeString";
+import { GET_CATEGORIES } from "../../api/queries";
 
-const GET_CATEGORIES = gql`
-  query GetCategories{
-    categories {
-      id
-      name
-    }
-  }
-`;
 
 function HeaderNavigation() {
   const { data, loading } = useQuery(GET_CATEGORIES);

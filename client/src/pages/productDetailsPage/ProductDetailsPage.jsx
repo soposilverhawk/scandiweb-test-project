@@ -1,6 +1,5 @@
-import React, { act, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
 import {
   ProductPageSection,
@@ -9,36 +8,8 @@ import {
 import ProductGalleryCarousel from "../../components/ProductGalleryCarousel/ProductGalleryCarousel";
 import ProductDescription from "../../components/ProductDescription/ProductDescription";
 import ProductSideGallery from "../../components/ProductSideGalleryView/ProductSideGalleryView";
+import { GET_PRODUCT } from "../../api/queries";
 
-const GET_PRODUCT = gql`
-  query GetProduct($id: Int!) {
-    product(id: $id) {
-      id
-      product_uid
-      name
-      in_stock
-      category_name
-      brand
-      description
-      product_gallery
-      product_prices {
-        amount
-        currency_label
-        currency_symbol
-      }
-      product_attributes {
-        attribute_id
-        type
-        name
-        product_attribute_items {
-          display_value
-          attribute_item_value
-          attribute_item_id
-        }
-      }
-    }
-  }
-`;
 
 function ProductDetailsPage() {
   const { id } = useParams();
