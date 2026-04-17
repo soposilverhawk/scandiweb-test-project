@@ -4,14 +4,14 @@ import {
   ProductName,
   ProductPriceDisplay,
   ProductDescriptionDisplay,
-} from "./ProductDescription.styles";
+} from "./ProductDetailsContainer.styles";
 import AttributeList from "../AttributeList/AttributeList";
 import ActionButton from "../Shared/ActionButton/ActionButton";
 import { usePricesMap } from "../../hooks/usePricesMap";
 import { StyledAttributesContainer } from "../AttributeList/AttributeList.styles";
 import { useParseHTML } from "../../hooks/useParseHTML";
 
-function ProductDescription({
+function ProductDetailsContainer({
   variant,
   productName,
   productAttributes,
@@ -38,7 +38,9 @@ function ProductDescription({
         />
         <StyledAttributesContainer $variant={variant}>
           <p>Price:</p>
-          <ProductPriceDisplay $variant={variant}>{`${currency}${amount}`}</ProductPriceDisplay>
+          <ProductPriceDisplay
+            $variant={variant}
+          >{`${currency}${amount}`}</ProductPriceDisplay>
         </StyledAttributesContainer>
         <ActionButton variant="add-to-cart">Add to cart</ActionButton>
         <ProductDescriptionDisplay data-testid="product-description">
@@ -49,4 +51,4 @@ function ProductDescription({
   );
 }
 
-export default ProductDescription;
+export default ProductDetailsContainer;

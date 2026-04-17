@@ -6,10 +6,9 @@ import {
   GalleryViewContainer,
 } from "./ProductDetailsPage.styles";
 import ProductGalleryCarousel from "../../components/ProductGalleryCarousel/ProductGalleryCarousel";
-import ProductDescription from "../../components/ProductDescription/ProductDescription";
+import ProductDetailsContainer from "../../components/ProductDetailsContainer/ProductDetailsContainer";
 import ProductSideGallery from "../../components/ProductSideGalleryView/ProductSideGalleryView";
 import { GET_PRODUCT } from "../../api/queries";
-
 
 function ProductDetailsPage() {
   const { id } = useParams();
@@ -37,7 +36,7 @@ function ProductDetailsPage() {
           setActiveImgIndex={setActiveImgIndex}
         />
       </GalleryViewContainer>
-      <ProductDescription
+      <ProductDetailsContainer
         variant="pdp"
         productName={data?.product?.name}
         productAttributes={data?.product?.product_attributes}
