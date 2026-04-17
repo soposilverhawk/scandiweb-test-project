@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import './App.css'
-import ContentWrapper from './components/ContentWrapper/ContentWrapper';
-import Header from './components/Header/Header';
-import AppRoutes from './routes/AppRoutes';
+import { useState } from "react";
+import "./App.css";
+import ContentWrapper from "./components/Shared/ContentWrapper/ContentWrapper";
+import Header from "./components/Shared/Header/Header";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-
   return (
     <ContentWrapper>
       <Header />
@@ -13,7 +12,7 @@ function App() {
         <AppRoutes />
       </main>
     </ContentWrapper>
-  )
+  );
 }
 
-export default App
+export default App;
