@@ -12,9 +12,9 @@ export const StyledActionButton = styled.button`
   text-transform: uppercase;
   cursor: pointer;
   border: none;
-  transition: transform 0.2s ease;
+  transition: background-color 0.1s ease;
 
   &:hover {
-    transform: scale(1.2);
+    background-color: #048354
   }
 `;
