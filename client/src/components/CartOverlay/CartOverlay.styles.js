@@ -5,8 +5,9 @@ export const CartOverlayContainer = styled.div`
   padding: 3.2rem 1.6rem;
   max-height: 63rem;
   width: 100%;
-  background-color: #fff;
+  background-color: red;
   position: absolute;
+  top: 100%;
   right: 0;
   display: flex;
   flex-direction: column;
