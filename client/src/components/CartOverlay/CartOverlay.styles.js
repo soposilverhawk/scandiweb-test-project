@@ -11,6 +11,7 @@ export const CartOverlayContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
+  z-index: 99999;
 `;
 
 export const CartHeader = styled.p`
