@@ -1,31 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyledAttributesContainer,
-  AttributeSelectable,
+  AttributeSelectableButton,
   AttributeSelectablesContainer,
   AttributeContainer,
 } from "./AttributeList.styles";
 import formatStringToKebabCase from "../../utils/formatStringToKebabCase";
 
-function AttributeList({ variant = "pdp", productAttributesData }) {
+function AttributeList({
+  variant = "pdp",
+  productAttributesData,
+  selectedAttributes,
+  setSelectedAttributes,
+}) {
+  const handleAttributeSelection = (attribute_id, value) => {
+    setSelectedAttributes((prev) => ({
+      ...prev,
+      [attribute_id]: value,
+    }));
+  };
+
   return (
-    productAttributesData.length !== 0 && (
+    productAttributesData?.length > 0 && (
       <StyledAttributesContainer $variant={variant}>
-        {productAttributesData?.map(
+        {productAttributesData.map(
           ({ attribute_id, name, product_attribute_items, type }) => (
-            <AttributeContainer data-testid={`product-attribute-${formatStringToKebabCase(name)}`}>
+            <AttributeContainer
+              key={attribute_id}
+              data-testid={`product-attribute-${formatStringToKebabCase(name)}`}
+            >
               <h2>{name}:</h2>
-              <AttributeSelectablesContainer key={attribute_id}>
-                {product_attribute_items?.map(
-                  ({ attribute_item_id, attribute_item_value }) => (
-                    <AttributeSelectable
-                      key={attribute_item_id}
-                      $attributeType={type}
-                      $attribute_item_value={attribute_item_value}
-                    >
-                      {type === "text" && attribute_item_value}
-                    </AttributeSelectable>
-                  ),
+
+              <AttributeSelectablesContainer>
+                {product_attribute_items.map(
+                  ({ attribute_item_id, attribute_item_value }) => {
+                    const isSelected =
+                      selectedAttributes?.[attribute_id] === attribute_item_id;
+
+                    return (
+                      <li key={attribute_item_id}>
+                        <AttributeSelectableButton
+                          $variant={variant}
+                          $attributeType={type}
+                          $attribute_item_value={attribute_item_value}
+                          $active={isSelected}
+                          onClick={() =>
+                            handleAttributeSelection(
+                              attribute_id,
+                              attribute_item_value,
+                            )
+                          }
+                        >
+                          {type === "text" && attribute_item_value}
+                        </AttributeSelectableButton>
+                      </li>
+                    );
+                  },
                 )}
               </AttributeSelectablesContainer>
             </AttributeContainer>
