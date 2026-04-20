@@ -12,6 +12,7 @@ export const CartButtonDefault = styled(ButtonBase)`
   width: 2rem;
   height: 2rem;
   background: none;
+  position: relative;
 `;
 
 export const QuickShopCartButton = styled(ButtonBase)`
@@ -25,10 +26,25 @@ export const QuickShopCartButton = styled(ButtonBase)`
   transform: translate(-25%, 25%);
   opacity: 0;
   visibility: hidden;
-  transition: transform 0.2s ease;
+  transition: background-color 0.1s ease;
   pointer-events: none;
 
   &:hover {
-    transform: scale(1.2);
+    background-color: #048354;
   }
+`;
+
+export const CartItemsQtyDisplay = styled.div`
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--secondary-color);
+  color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  transform: translate(70%, -40%);
 `;

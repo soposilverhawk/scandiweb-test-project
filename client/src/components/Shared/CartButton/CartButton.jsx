@@ -4,12 +4,22 @@ import cartProductCardIconfrom from "../../../assets/cart/cart-icon-white.png";
 import {
   CartButtonDefault,
   QuickShopCartButton,
+  CartItemsQtyDisplay,
 } from "../CartButton/CartButton.styles";
+import { useCart } from "../../../context/CartContext";
 
 function CartButton({ variant = "defaultEmpty", onClick }) {
+  const { cart, setIsCartOpen, calculateTotalItems } = useCart();
+  const handleCartOverlayToggle = () => {
+    setIsCartOpen((prev) => !prev)
+  }
+
   return variant === "defaultEmpty" ? (
-    <CartButtonDefault>
+    <CartButtonDefault onClick={handleCartOverlayToggle}>
       <img src={cartHeaderIcon} alt="cart" />
+      {cart.length !== 0 && (
+        <CartItemsQtyDisplay>{calculateTotalItems}</CartItemsQtyDisplay>
+      )}
     </CartButtonDefault>
   ) : (
     <QuickShopCartButton onClick={onClick}>
