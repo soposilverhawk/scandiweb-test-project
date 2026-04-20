@@ -1,6 +1,5 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { usePricesMap } from "../hooks/usePricesMap";
 import createPricesMap from "../utils/createPricesMap";
 
 const CartContext = createContext();
@@ -8,7 +7,6 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useLocalStorage("cart", []);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { curency, amount } = usePricesMap(cart?.product_prices);
 
   const getCartItemKey = (productId, selectedAttributes) =>
     `${productId}-${JSON.stringify(selectedAttributes)}`;
