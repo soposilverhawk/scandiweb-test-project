@@ -38,10 +38,7 @@ function ProductDetailsPage() {
       </GalleryViewContainer>
       <ProductDetailsContainer
         variant="pdp"
-        productName={data?.product?.name}
-        productAttributes={data?.product?.product_attributes}
-        productPrices={data?.product?.product_prices}
-        productDescription={data?.product?.description}
+        product={data?.product}
       />
     </ProductPageSection>
   );
