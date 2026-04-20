@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ProductDescriptionContainer,
   ProductName,
@@ -10,44 +10,39 @@ import ActionButton from "../Shared/ActionButton/ActionButton";
 import { usePricesMap } from "../../hooks/usePricesMap";
 import { StyledAttributesContainer } from "../AttributeList/AttributeList.styles";
 import { useParseHTML } from "../../hooks/useParseHTML";
+import { useCart } from "../../context/CartContext";
 
-function ProductDetailsContainer({
-  variant,
-  productName,
-  productAttributes,
-  productPrices,
-  productDescription,
-}) {
-  const { amount, currency } = usePricesMap(productPrices);
-  const parsedProductDescription = useParseHTML(productDescription);
+function ProductDetailsContainer({ variant, product }) {
+  const { amount, currency } = usePricesMap(product?.product_prices);
+  const parsedProductDescription = useParseHTML(product?.description);
+  const [selectedAttributes, setSelectedAttributes] = useState({});
+  const { cart, addToCart, setIsCartOpen } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart(product, selectedAttributes);
+    setIsCartOpen(true);
+  };
 
   return (
-    <>
-      {variant === "cartOverlay" && (
-        <h2>
-          My bag, <span>3</span> items
-        </h2>
-      )}
-      <ProductDescriptionContainer $variant={variant}>
-        <ProductName as={variant === "pdp" ? "h1" : "p"} $variant={variant}>
-          {productName}
-        </ProductName>
-        <AttributeList
-          variant={variant}
-          productAttributesData={productAttributes}
-        />
-        <StyledAttributesContainer $variant={variant}>
-          <p>Price:</p>
-          <ProductPriceDisplay
-            $variant={variant}
-          >{`${currency}${amount}`}</ProductPriceDisplay>
-        </StyledAttributesContainer>
-        <ActionButton variant="add-to-cart">Add to cart</ActionButton>
-        <ProductDescriptionDisplay data-testid="product-description">
-          {parsedProductDescription}
-        </ProductDescriptionDisplay>
-      </ProductDescriptionContainer>
-    </>
+    <ProductDescriptionContainer>
+      <ProductName>{product?.name}</ProductName>
+      <AttributeList
+        variant={variant}
+        productAttributesData={product?.product_attributes}
+        selectedAttributes={selectedAttributes}
+        setSelectedAttributes={setSelectedAttributes}
+      />
+      <StyledAttributesContainer $variant={variant}>
+        <p>Price:</p>
+        <ProductPriceDisplay>{`${currency}${amount}`}</ProductPriceDisplay>
+      </StyledAttributesContainer>
+      <ActionButton variant="add-to-cart" onclick={handleAddToCart}>
+        Add to cart
+      </ActionButton>
+      <ProductDescriptionDisplay data-testid="product-description">
+        {parsedProductDescription}
+      </ProductDescriptionDisplay>
+    </ProductDescriptionContainer>
   );
 }
 

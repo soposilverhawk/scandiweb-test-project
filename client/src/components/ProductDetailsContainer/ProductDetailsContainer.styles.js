@@ -3,22 +3,20 @@ import styled from "styled-components";
 export const ProductDescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  column-gap: ${({ $variant }) => ($variant === "pdp" ? "3.2rem" : "4rem")};
+  column-gap: 3.2rem;
   max-width: 29.2rem;
   min-height: 54.1rem;
   justify-content: space-between;
 `;
 
 export const ProductName = styled.p`
-  font-size: ${({ $variant }) =>
-    $variant === "pdp" ? "3rem" : "var(--product-details-text)"};
-  font-weight: ${({ $variant }) => ($variant === "pdp" ? 600 : 300)};
+  font-size: 3rem;
+  font-weight: 600;
   color: var(--secondary-color);
 `;
 
 export const ProductPriceDisplay = styled.span`
-  font-size: ${({ $variant }) =>
-    $variant === "pdp" ? "2.4rem" : "var(--text-standard-size)"};
+  font-size: 2.4rem;
   font-weight: 700;
 `;
 
