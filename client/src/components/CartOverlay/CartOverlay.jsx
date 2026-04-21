@@ -9,9 +9,11 @@ import {
 } from "./CartOverlay.styles";
 import CartItem from "../CartItem/CartItem";
 import ActionButton from "../Shared/ActionButton/ActionButton";
+import { usePrefferedCurrency } from "../../context/PrefferedCurrencyContext";
 
 function CartOverlay() {
   const { cart, calculateTotalCost, calculateTotalItems } = useCart();
+  const { currency } = usePrefferedCurrency();
 
   return (
     cart.length !== 0 && (
@@ -31,8 +33,8 @@ function CartOverlay() {
         <CartTotalContainer>
           <p>Total</p>
           <span>
-            ${calculateTotalCost.toFixed(2)}
-            {/* placeholder hardcoded currency */}
+            {currency}
+            {calculateTotalCost.toFixed(2)}
           </span>
         </CartTotalContainer>
         <ActionButton variant="place-order">Place order</ActionButton>
