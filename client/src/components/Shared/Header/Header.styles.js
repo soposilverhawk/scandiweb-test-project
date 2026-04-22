@@ -6,6 +6,10 @@ export const StyledHeader = styled.header`
   position: sticky;
   top: 0;
   z-index: 9999;
+  border-bottom: ${({ $isScrolled }) =>
+    $isScrolled ? "1px solid var(--out-of-stock-color)" : "#fff"};
+
+  transition: border-bottom 0.5s ease;
 `;
 
 export const HeaderInner = styled.div`

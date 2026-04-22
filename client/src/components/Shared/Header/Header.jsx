@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../assets/logo/logo.png";
 import HeaderNavigation from "../../HeaderNavigation/HeaderNavigation";
 import CartButton from "../CartButton/CartButton";
@@ -10,9 +10,20 @@ import ContentWrapper from "../ContentWrapper/ContentWrapper";
 
 function Header({ isCartOpen }) {
   const navigate = useNavigate();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <StyledHeader>
+    <StyledHeader $isScrolled={isScrolled}>
       <ContentWrapper>
         <HeaderInner>
           <HeaderNavigation />
