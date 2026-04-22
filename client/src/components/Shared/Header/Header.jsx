@@ -5,7 +5,6 @@ import CartButton from "../CartButton/CartButton";
 import { StyledHeader, HomeButton, HeaderInner } from "./Header.styles";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/Routes";
-import { useCart } from "../../../context/CartContext";
 import CartOverlay from "../../CartOverlay/CartOverlay";
 import ContentWrapper from "../ContentWrapper/ContentWrapper";
 
