@@ -14,7 +14,13 @@ import { useMutation } from "@apollo/client/react";
 import { PLACE_ORDER } from "../../api/mutations";
 
 function CartOverlay() {
-  const { cart, calculateTotalCost, calculateTotalItems, clearCart } = useCart();
+  const {
+    cart,
+    calculateTotalCost,
+    calculateTotalItems,
+    clearCart,
+    setIsCartOpen,
+  } = useCart();
   const { currency } = usePrefferedCurrency();
   const [placeOrder, { data, loading, error }] = useMutation(PLACE_ORDER);
 
@@ -34,6 +40,7 @@ function CartOverlay() {
       },
     });
     clearCart();
+    setIsCartOpen(false);
   };
 
   return (
