@@ -9,9 +9,9 @@ import { useCart } from "../../../context/CartContext";
 import CartOverlay from "../../CartOverlay/CartOverlay";
 import ContentWrapper from "../ContentWrapper/ContentWrapper";
 
-function Header() {
+function Header({ isCartOpen }) {
   const navigate = useNavigate();
-  const { isCartOpen } = useCart();
+
   return (
     <StyledHeader>
       <ContentWrapper>

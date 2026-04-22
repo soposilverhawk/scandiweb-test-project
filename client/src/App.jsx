@@ -6,14 +6,14 @@ import CartOverlay from "./components/CartOverlay/CartOverlay";
 import { useCart } from "./context/CartContext";
 
 function App() {
-  const {isCartOpen} = useCart();
+  const { isCartOpen } = useCart();
   return (
     <>
-      <Header />
+      <Header isCartOpen={isCartOpen} />
       <main>
         <ContentWrapper>
           <AppRoutes />
-          {isCartOpen && (<div className="backdrop" />)}
+          {isCartOpen && <div className="backdrop" />}
         </ContentWrapper>
       </main>
     </>
