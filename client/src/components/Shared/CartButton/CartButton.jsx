@@ -17,7 +17,7 @@ function CartButton({ variant = "defaultEmpty", onClick }) {
   }
 
   return variant === "defaultEmpty" ? (
-    <CartButtonDefault onClick={handleCartOverlayToggle}>
+    <CartButtonDefault onClick={handleCartOverlayToggle} data-testid="cart-btn">
       <img src={cartHeaderIcon} alt="cart" />
       {cart.length !== 0 && (
         <CartItemsQtyDisplay>{calculateTotalItems}</CartItemsQtyDisplay>
