@@ -6,6 +6,7 @@ import {
   CartHeader,
   CartItemsContainer,
   CartTotalContainer,
+  EmptyCartMessage,
 } from "./CartOverlay.styles";
 import CartItem from "../CartItem/CartItem";
 import ActionButton from "../Shared/ActionButton/ActionButton";
@@ -24,12 +25,6 @@ function CartOverlay() {
   const { currency } = usePrefferedCurrency();
   const [placeOrder, { data, loading, error }] = useMutation(PLACE_ORDER);
 
-  useEffect(() => {
-    if (cart.length === 0) {
-      setIsCartOpen(false);
-    }
-  }, [cart])
-
   const handlePlaceOrder = () => {
     placeOrder({
       variables: {
@@ -46,36 +41,43 @@ function CartOverlay() {
       },
     });
     clearCart();
-    setIsCartOpen(false);
   };
 
   return (
-    cart.length !== 0 && (
-      <CartOverlayContainer>
-        <CartHeader>
-          My bag,
-          <span>
-            {` ${calculateTotalItems} `}
-            {calculateTotalItems === 1 ? "item" : "items"}
-          </span>
-        </CartHeader>
+    <CartOverlayContainer>
+      <CartHeader>
+        My bag,
+        <span>
+          {` ${calculateTotalItems} `}
+          {calculateTotalItems === 1 ? "item" : "items"}
+        </span>
+      </CartHeader>
+      {cart.length === 0 ? (
+        <EmptyCartMessage>
+          The cart is empty...
+        </EmptyCartMessage>
+      ) : (
         <CartItemsContainer>
           {cart?.map((cartItem) => (
             <CartItem item={cartItem} key={cartItem?.key} />
           ))}
         </CartItemsContainer>
-        <CartTotalContainer>
-          <p>Total</p>
-          <span>
-            {currency}
-            {calculateTotalCost.toFixed(2)}
-          </span>
-        </CartTotalContainer>
-        <ActionButton variant="place-order" onclick={handlePlaceOrder}>
-          Place order
-        </ActionButton>
-      </CartOverlayContainer>
-    )
+      )}
+      <CartTotalContainer>
+        <p>Total</p>
+        <span>
+          {currency}
+          {calculateTotalCost.toFixed(2)}
+        </span>
+      </CartTotalContainer>
+      <ActionButton
+        variant="place-order"
+        onclick={handlePlaceOrder}
+        disabled={cart.length === 0}
+      >
+        Place order
+      </ActionButton>
+    </CartOverlayContainer>
   );
 }
 

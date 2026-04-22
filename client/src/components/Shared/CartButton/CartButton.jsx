@@ -11,9 +11,7 @@ import { useCart } from "../../../context/CartContext";
 function CartButton({ variant = "defaultEmpty", onClick }) {
   const { cart, setIsCartOpen, calculateTotalItems } = useCart();
   const handleCartOverlayToggle = () => {
-    if (cart.length !== 0) {
-      setIsCartOpen((prev) => !prev)
-    }
+    setIsCartOpen((prev) => !prev)
   }
 
   return variant === "defaultEmpty" ? (

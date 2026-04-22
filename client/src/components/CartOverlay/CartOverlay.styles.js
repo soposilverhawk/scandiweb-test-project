@@ -42,3 +42,7 @@ export const CartTotalContainer = styled.div`
   font-weight: 700;
   font-size: var(--text-standard-size);
 `;
+
+export const EmptyCartMessage = styled.p`
+  font-size: 1.4rem;
+`;

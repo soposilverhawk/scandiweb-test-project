@@ -14,7 +14,14 @@ export const StyledActionButton = styled.button`
   border: none;
   transition: background-color 0.1s ease;
 
-  &:hover {
-    background-color: #048354
+  &:hover:not(:disabled) {
+    background-color: #048354;
+  }
+
+  &:disabled {
+    background-color: #39374838;
+    color: #777;
+    cursor: not-allowed;
+    opacity: 0.8;
   }
 `;
