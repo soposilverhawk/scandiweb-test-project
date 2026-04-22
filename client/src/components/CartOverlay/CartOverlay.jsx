@@ -24,6 +24,12 @@ function CartOverlay() {
   const { currency } = usePrefferedCurrency();
   const [placeOrder, { data, loading, error }] = useMutation(PLACE_ORDER);
 
+  useEffect(() => {
+    if (cart.length === 0) {
+      setIsCartOpen(false);
+    }
+  }, [cart])
+
   const handlePlaceOrder = () => {
     placeOrder({
       variables: {
