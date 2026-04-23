@@ -30,7 +30,7 @@ class ProductFactory
         return match (strtolower($categoryName)) {
 
             'clothes' => new ClothesProduct(
-                $data['id'],
+                $data['id'] ?? null,
                 $data['productUID'],
                 $data['name'],
                 (bool)$data['inStock'],
@@ -43,7 +43,7 @@ class ProductFactory
             ),
 
             'tech' => new TechProduct(
-                $data['id'],
+                $data['id'] ?? null,
                 $data['productUID'],
                 $data['name'],
                 (bool)$data['inStock'],
@@ -56,7 +56,7 @@ class ProductFactory
             ),
 
             'all' => new AllProduct(
-                $data['id'],
+                $data['id'] ?? null,
                 $data['productUID'],
                 $data['name'],
                 (bool)$data['inStock'],

@@ -7,7 +7,7 @@ use App\Models\Category\Category;
 class AllProduct extends Product
 {
     public function __construct(
-        int $id,
+        ?int $id,
         string $productUID,
         string $name,
         bool $inStock,

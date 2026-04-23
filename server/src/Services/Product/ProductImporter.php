@@ -77,8 +77,9 @@ class ProductImporter
             }
 
             // Create product model instance using ProductFactory
-            $product = ProductFactory::create($categoryName, [
-                'id'=>$p['id'],
+            $product = ProductFactory::create($categoryMap[$categoryName], $categoryName, [
+                'id' => null,
+                'productUID'=>$p['id'],
                 'name'=>$p['name'],
                 'inStock'=>$p['inStock'],
                 'brand'=>$p['brand'],
@@ -90,10 +91,10 @@ class ProductImporter
             
 
             // Check if product exists in DB
-            $productId = $this->productRepo->findIdByUid($product->getId());
+            $productId = $this->productRepo->findIdByUid($product->getProductUID());
 
             $data = [
-                'uid'=>$product->getId(),
+                'uid'=>$product->getProductUID(),
                 'name'=>$product->getName(),
                 'stock'=>$product->isInStock() ? 1 : 0,
                 'category_id'=>$categoryMap[$categoryName],

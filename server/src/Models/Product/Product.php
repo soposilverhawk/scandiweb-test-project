@@ -6,7 +6,7 @@ use App\Models\Category\Category;
 
 abstract class Product
 {
-    protected int $id;
+    protected ?int $id; // DB id
     protected string $productUID;
     protected string $name;
     protected bool $inStock;
@@ -21,7 +21,7 @@ abstract class Product
     protected Category $categoryObject;
 
     public function __construct(
-        int $id,
+        ?int $id,
         string $productUID,
         string $name,
         bool $inStock,
@@ -53,7 +53,7 @@ abstract class Product
     abstract public function getType(): string;
 
     // Common getters
-    public function getId(): int 
+    public function getId(): ?int 
     { 
         return $this->id; 
     }
