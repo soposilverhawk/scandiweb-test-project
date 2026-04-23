@@ -36,7 +36,11 @@ function ProductDetailsContainer({ variant, product }) {
         <p>Price:</p>
         <ProductPriceDisplay>{`${currency}${amount}`}</ProductPriceDisplay>
       </StyledAttributesContainer>
-      <ActionButton variant="add-to-cart" onclick={handleAddToCart}>
+      <ActionButton
+        variant="add-to-cart"
+        onclick={handleAddToCart}
+        disabled={!product.in_stock}
+      >
         Add to cart
       </ActionButton>
       <ProductDescriptionDisplay data-testid="product-description">
