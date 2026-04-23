@@ -27,7 +27,11 @@ function AttributeList({
           ({ attribute_id, name, product_attribute_items, type }) => (
             <AttributeContainer
               key={attribute_id}
-              data-testid={`product-attribute-${formatStringToKebabCase(name)}`}
+              data-testid={
+                variant === "pdp"
+                  ? `product-attribute-${formatStringToKebabCase(name)}`
+                  : `cart-item-attribute-${formatStringToKebabCase(name)}`
+              }
             >
               <h2>{name}:</h2>
 
