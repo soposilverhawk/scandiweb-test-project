@@ -53,9 +53,7 @@ function CartOverlay() {
         </span>
       </CartHeader>
       {cart.length === 0 ? (
-        <EmptyCartMessage>
-          The cart is empty...
-        </EmptyCartMessage>
+        <EmptyCartMessage>The cart is empty...</EmptyCartMessage>
       ) : (
         <CartItemsContainer>
           {cart?.map((cartItem) => (
@@ -65,7 +63,7 @@ function CartOverlay() {
       )}
       <CartTotalContainer>
         <p>Total</p>
-        <span>
+        <span data-testid="cart-total">
           {currency}
           {calculateTotalCost.toFixed(2)}
         </span>
