@@ -25,15 +25,10 @@ function CategoryPage() {
       <CategoryHeading>{capitalizeString(categoryName)}</CategoryHeading>
       <ProductsContainer>
         {data.products.map(
-          ({ name, product_gallery, product_prices, product_uid, id, in_stock }) => (
+          (product) => (
             <ProductCard
-              name={name}
-              image={product_gallery[0]}
-              productPrices={product_prices}
-              productUid={product_uid}
-              id={id}
-              isInStock={in_stock}
-              key={product_uid}
+              product={product}
+              key={product?.product_uid}
             />
           ),
         )}

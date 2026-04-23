@@ -21,6 +21,16 @@ export const GET_PRODUCTS_BY_CATEGORY = gql`
         amount
         currency_symbol
       }
+      product_attributes {
+        attribute_id
+        type
+        name
+        product_attribute_items {
+          display_value
+          attribute_item_value
+          attribute_item_id
+        }
+      }
     }
   }
 `;
