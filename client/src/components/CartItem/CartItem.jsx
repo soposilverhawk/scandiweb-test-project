@@ -36,11 +36,11 @@ function CartItem({ item }) {
         />
       </ItemInfoContainer>
       <ItemControlsContainer>
-        <CartItemQuantityButton onClick={() => increaseQuantity(item?.key)}>
+        <CartItemQuantityButton variant="increase" onClick={() => increaseQuantity(item?.key)}>
           +
         </CartItemQuantityButton>
         <ItemAmountDisplay>{item?.quantity}</ItemAmountDisplay>
-        <CartItemQuantityButton onClick={() => decreaseQuantity(item?.key)}>
+        <CartItemQuantityButton variant="decrease" onClick={() => decreaseQuantity(item?.key)}>
           -
         </CartItemQuantityButton>
       </ItemControlsContainer>
