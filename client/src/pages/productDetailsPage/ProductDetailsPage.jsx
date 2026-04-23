@@ -25,7 +25,7 @@ function ProductDetailsPage() {
 
   return (
     <ProductPageSection>
-      <GalleryViewContainer>
+      <GalleryViewContainer data-testid="product-gallery">
         <ProductSideGallery
           productGallery={productGallery}
           setActiveImgIndex={setActiveImgIndex}
