@@ -39,7 +39,7 @@ function CartItem({ item }) {
         <CartItemQuantityButton variant="increase" onClick={() => increaseQuantity(item?.key)}>
           +
         </CartItemQuantityButton>
-        <ItemAmountDisplay>{item?.quantity}</ItemAmountDisplay>
+        <ItemAmountDisplay data-testid="cart-item-amount">{item?.quantity}</ItemAmountDisplay>
         <CartItemQuantityButton variant="decrease" onClick={() => decreaseQuantity(item?.key)}>
           -
         </CartItemQuantityButton>
