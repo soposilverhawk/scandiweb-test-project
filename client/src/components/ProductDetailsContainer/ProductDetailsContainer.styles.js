@@ -7,6 +7,7 @@ export const ProductDescriptionContainer = styled.div`
   max-width: 29.2rem;
   min-height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 
   /* Firefox */
   scrollbar-width: none;
