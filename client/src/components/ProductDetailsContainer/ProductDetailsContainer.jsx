@@ -17,6 +17,7 @@ function ProductDetailsContainer({ variant, product }) {
   const parsedProductDescription = useParseHTML(product?.description);
   const [selectedAttributes, setSelectedAttributes] = useState({});
   const { cart, addToCart, setIsCartOpen } = useCart();
+  const isSelectedAttributesEmpty = Object.keys(selectedAttributes).length === 0;
 
   const handleAddToCart = () => {
     addToCart(product, selectedAttributes);
@@ -39,7 +40,7 @@ function ProductDetailsContainer({ variant, product }) {
       <ActionButton
         variant="add-to-cart"
         onclick={handleAddToCart}
-        disabled={!product.in_stock}
+        disabled={!product.in_stock || isSelectedAttributesEmpty}
       >
         Add to cart
       </ActionButton>
