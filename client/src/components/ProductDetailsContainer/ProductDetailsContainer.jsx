@@ -22,6 +22,7 @@ function ProductDetailsContainer({ variant, product }) {
   const handleAddToCart = () => {
     addToCart(product, selectedAttributes);
     setIsCartOpen(true);
+    setSelectedAttributes({});
   };
 
   return (
