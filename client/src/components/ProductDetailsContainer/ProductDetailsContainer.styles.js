@@ -3,10 +3,18 @@ import styled from "styled-components";
 export const ProductDescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  column-gap: 3.2rem;
+  row-gap: 4rem;
   max-width: 29.2rem;
-  min-height: 54.1rem;
-  justify-content: space-between;
+  min-height: 100%;
+  overflow-y: auto;
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* Chrome, Safari, Edge */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ProductName = styled.p`
@@ -22,4 +30,29 @@ export const ProductPriceDisplay = styled.span`
 
 export const ProductDescriptionDisplay = styled.div`
   font-size: var(--text-standard-size);
+  max-height: 10rem;
+
+  line-height: 1.6;
+
+  p {
+    font-size: 1.6rem;
+    margin: 2rem 0;
+  }
+
+  ul,
+  ol {
+    list-style: disc;
+    list-style-position: inside;
+    margin: 1rem 0;
+  }
+
+  li {
+    margin-bottom: 0.8rem;
+  }
+
+  h1,
+  h3 {
+    font-weight: bold;
+    font-size: var(--product-details-text);
+  }
 `;
