@@ -37,9 +37,14 @@ function AttributeList({
 
               <AttributeSelectablesContainer>
                 {product_attribute_items.map(
-                  ({ attribute_item_id, attribute_item_value }) => {
+                  ({
+                    attribute_item_id,
+                    attribute_item_value,
+                    display_value,
+                  }) => {
                     const isSelected =
-                      selectedAttributes?.[attribute_id] === attribute_item_id;
+                      selectedAttributes?.[attribute_id] ===
+                      attribute_item_value;
 
                     return (
                       <li key={attribute_item_id}>
@@ -48,11 +53,22 @@ function AttributeList({
                           $attributeType={type}
                           $attribute_item_value={attribute_item_value}
                           $active={isSelected}
-                          onClick={() =>
-                            handleAttributeSelection(
-                              attribute_id,
-                              attribute_item_value,
-                            )
+                          data-testid={
+                            variant === "cart-overlay"
+                              ? isSelected
+                                ? `cart-item-attribute-${formatStringToKebabCase(name)}-${formatStringToKebabCase(display_value)}-selected`
+                                : `cart-item-attribute-${formatStringToKebabCase(name)}-${formatStringToKebabCase(display_value)}`
+                              : undefined
+                          }
+                          disabled={variant === "cart-overlay" && !isSelected ? true : false}
+                          onClick={
+                            variant === "pdp"
+                              ? () =>
+                                  handleAttributeSelection(
+                                    attribute_id,
+                                    attribute_item_value,
+                                  )
+                              : undefined
                           }
                         >
                           {type === "text" && attribute_item_value}
