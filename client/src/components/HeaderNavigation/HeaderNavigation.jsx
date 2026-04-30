@@ -15,12 +15,12 @@ function HeaderNavigation() {
     <StyledUL>
       {data.categories.map((cat) => {
         const isActive =
-          location.pathname === `/category/${cat.name.toLowerCase()}`;
+          location.pathname === `/${cat.name.toLowerCase()}`;
 
         return (
           <StyledListItem key={`${cat.name}-category-${cat.id}`}>
             <Link
-              to={`/category/${cat.name.toLowerCase()}`}
+              to={`/${cat.name.toLowerCase()}`}
               data-testid={isActive ? "active-category-link" : "category-link"}
             >
               {capitalizeString(cat.name)}
