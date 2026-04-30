@@ -54,13 +54,15 @@ function AttributeList({
                           $attribute_item_value={attribute_item_value}
                           $active={isSelected}
                           data-testid={
-                            variant === "cart-overlay"
-                              ? isSelected
-                                ? `cart-item-attribute-${formatStringToKebabCase(name)}-${formatStringToKebabCase(display_value)}-selected`
-                                : `cart-item-attribute-${formatStringToKebabCase(name)}-${formatStringToKebabCase(display_value)}`
-                              : undefined
+                            isSelected
+                              ? `product-attribute-${formatStringToKebabCase(name)}-${display_value}-selected`
+                              : `product-attribute-${formatStringToKebabCase(name)}-${display_value}`
                           }
-                          disabled={variant === "cart-overlay" && !isSelected ? true : false}
+                          disabled={
+                            variant === "cart-overlay" && !isSelected
+                              ? true
+                              : false
+                          }
                           onClick={
                             variant === "pdp"
                               ? () =>
