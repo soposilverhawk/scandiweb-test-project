@@ -44,7 +44,7 @@ function CartOverlay() {
   };
 
   return (
-    <CartOverlayContainer>
+    <CartOverlayContainer data-testid="cart-overlay">
       <CartHeader>
         My bag,
         <span>
