@@ -17,6 +17,10 @@ export const HeaderInner = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+
+  @media (max-width: 768px) {
+    position: static;
+  }
 `;
 
 export const HomeButton = styled.button`

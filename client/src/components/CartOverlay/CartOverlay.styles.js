@@ -13,11 +13,20 @@ export const CartOverlayContainer = styled.div`
   flex-direction: column;
   gap: 3.2rem;
   z-index: 99999;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: 3.2rem 0;
+  }
 `;
 
 export const CartHeader = styled.p`
   font-size: var(--text-standard-size);
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    padding: 0 2.4rem;
+  }
 `;
 
 export const CartItemsContainer = styled.div`
@@ -34,6 +43,10 @@ export const CartItemsContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media (max-width: 768px) {
+    padding: 0 2.4rem;
+  }
 `;
 
 export const CartTotalContainer = styled.div`
@@ -41,6 +54,10 @@ export const CartTotalContainer = styled.div`
   justify-content: space-between;
   font-weight: 700;
   font-size: var(--text-standard-size);
+
+  @media (max-width: 768px) {
+    padding: 0 2.4rem;
+  }
 `;
 
 export const EmptyCartMessage = styled.p`
