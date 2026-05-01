@@ -42,6 +42,10 @@ export const ProductImage = styled.img`
   height: 100%;
   object-fit: cover;
   object-position: 50% 10%;
+
+  @media (max-width: 768px) {
+    object-fit: contain;
+  }
 `;
 
 export const ProductInformationContainer = styled.div`

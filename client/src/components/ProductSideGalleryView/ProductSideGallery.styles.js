@@ -16,6 +16,11 @@ export const ProductSideGalleryContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    max-width: 100%;
+  }
 `;
 
 export const ProductImageButton = styled.button`
@@ -29,6 +34,10 @@ export const ProductImageButton = styled.button`
 
   &:hover {
     transform: scale(1.2);
+  }
+
+  @media (max-width: 768px) {
+    max-width: 8rem;
   }
 `;
 

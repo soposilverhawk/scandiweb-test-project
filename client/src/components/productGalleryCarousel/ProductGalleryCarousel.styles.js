@@ -10,6 +10,10 @@ export const CarouselContainer = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+
+  @media (max-width: 768px) {
+    height: 70%;
+  }
 `;
 
 export const NavigationButton = styled.button`
